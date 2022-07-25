@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+
+    <body>
+        <br>
+        <h2>
+            One Row Affected
+        </h2>
+
+        <table>
+            <tr>
+                <th>unique_ID</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>age</th>
+            </tr>
+
+            <tr>
+                <td>{{data['unique_ID']}}</td>
+                <td>{{data['first name']}}</td>
+                <td>{{data['last name']}}</td>
+                <td>{{data['age']}}</td>
+            </tr>
+        </table>
+
+    </body>
+</html>
+

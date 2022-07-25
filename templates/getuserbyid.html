@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Get Row by ID</title>
+    </head>
+
+    <body>
+        <br>
+        <h1>
+            Select Unique ID
+        </h1>
+
+        <ul>
+            {% for i in lst %}
+                <li>
+                    <a target = '_blank' href="/getuserbyid/{{i}}">
+                        <h2>/get user by id/{{i}}</h2>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>        
+
+    </body>
+</html>
+
