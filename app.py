@@ -22,27 +22,87 @@ def get_user_by_id(unique_ID):
 
 	from mydatabase import fire
 	path = f'apigee/{unique_ID}'
-
 	json_data = fire.call(path)
-	return jsonify(json_data)
+
+	if json_data == None:
+		return jsonify({
+			'error' : {
+				'description' : f'Unique ID {unique_ID} not Found in Database.'
+			}
+		})
+	else:
+		return jsonify(json_data)
 
 
 @app.route('/getuserbyid')
-def get_user_by_id_form():
+def get_user_by_id_select():
 
 	from mydatabase import fire
 	path = 'apigee'
-
 	json_data = fire.call(path)
-	lst = list(json_data.keys())
+
+	if json_data == None:
+		lst = []
+	else:
+		lst = list(json_data.keys())
 
 	return render_template('getuserbyid.html',
 							lst=lst,
 						)
 		
 
-@app.route('/postrow')
-def post_row():
+@app.route('/deleteuserbyid/<unique_ID>')
+def delete_user_by_id(unique_ID):
+
+	from mydatabase import fire
+	path = f'apigee/{unique_ID}'
+	data = {
+		'unique_ID' : unique_ID,
+		'first name' : f'first_name_{unique_ID}',
+		'last name' : f'last_name_{unique_ID}',
+		'age' : f'age_{unique_ID}',
+	}
+	json_data = fire.call(path)
+
+	if json_data != None:
+		fire.send(path)
+		
+		return jsonify({
+			'deleted' : {
+				'data' : data,
+				'description' : f'Unique ID {unique_ID} has been Deleted from Database.'
+			}
+		})
+
+	else:
+		return jsonify({
+			'error' : {
+				'message' : "Couldn't Delete Data.",
+				'description' : f'Unique ID {unique_ID} Not Found in Database.',
+			}
+		})
+
+
+@app.route('/deleteuserbyid')
+def delete_user_by_id_select():
+
+	from mydatabase import fire
+	path = 'apigee'
+	json_data = fire.call(path)
+
+	if json_data == None:
+		lst = []
+	else:
+		lst = list(json_data.keys())
+
+	return render_template('deleteuserbyid.html',
+							lst=lst,
+						)
+		
+
+
+@app.route('/createuser')
+def create_user():
 	from mydatabase import fire
 	import random
 
@@ -56,7 +116,7 @@ def post_row():
 
 	path = f'apigee/{ran}'
 	fire.send(path, data)
-	return render_template('posted.html', data=data)
+	return render_template('createuser.html', data=data)
 
 
 @app.errorhandler(404)

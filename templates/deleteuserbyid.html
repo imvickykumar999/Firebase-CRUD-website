@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Get Row by ID</title>
+        <title>Delete Row by ID</title>
         <meta http-equiv="refresh" content="2" />
     </head>
 
     <body>
         <br>
         <h1>
-            Select Unique ID to view
+            Select Unique ID to Delete
         </h1>
 
         <ul>
             {% for i in lst %}
                 <li>
-                    <a target = '_blank' href="/getuserbyid/{{i}}">
-                        <h2>/get user by id/{{i}}</h2>
+                    <a target = '_blank' href="/deleteuserbyid/{{i}}">
+                        <h2>/delete user by id/{{i}}</h2>
                     </a>
                 </li>
             {% endfor %}
@@ -23,4 +23,3 @@
 
     </body>
 </html>
-

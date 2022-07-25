@@ -19,7 +19,6 @@ def call(path = 'apigee'):
     return name
 
 
-def send(path, data):
+def send(path, data = {}):
     refv = db.reference(path)
     refv.set(data)
-    
