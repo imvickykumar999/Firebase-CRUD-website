@@ -21,26 +21,44 @@
     </head>
 
     <body>
+
         <br>
-        <h2>
-            Below Row Created
-        </h2>
+        {% if submitted %}
+            <h2>
+                Below Row Created
+            </h2>
 
-        <table>
-            <tr>
-                <th>unique_ID</th>
-                <th>first name</th>
-                <th>last name</th>
-                <th>age</th>
-            </tr>
+            <table>
+                <tr>
+                    <th>unique_ID</th>
+                    <th>first name</th>
+                    <th>last name</th>
+                    <th>age</th>
+                </tr>
 
-            <tr>
-                <td>{{data['unique_ID']}}</td>
-                <td>{{data['first name']}}</td>
-                <td>{{data['last name']}}</td>
-                <td>{{data['age']}}</td>
-            </tr>
-        </table>
+                <tr>
+                    <td>{{data['unique_ID']}}</td>
+                    <td>{{data['first name']}}</td>
+                    <td>{{data['last name']}}</td>
+                    <td>{{data['age']}}</td>
+                </tr>
+            </table>
+
+            <a href="/createuser">
+                <h2>
+                    Add New User
+                </h2>
+            </a>
+
+        {% else %}
+            <h1>Fill Form to Create New User.</h1>
+            <form method="POST" action="/createduser">
+                <input type="text" name="fname" placeholder="Vicky">
+                <input type="text" name="lname" placeholder="Kumar">
+                <input type="text" name="age" placeholder="23">
+                <input type="submit">
+            </form>
+        {% endif %}
 
     </body>
 </html>

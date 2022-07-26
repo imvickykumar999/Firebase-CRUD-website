@@ -103,20 +103,36 @@ def delete_user_by_id_select():
 
 @app.route('/createuser')
 def create_user():
-	from mydatabase import fire
-	import random
+	return render_template('createuser.html',
+							submitted = False,
+						)
 
-	ran = random.randint(1000, 9999)
-	data = {
-		'unique_ID' : ran,
-		'first name' : f'first_name_{ran}',
-		'last name' : f'last_name_{ran}',
-		'age' : f'age_{ran}',
-	}
 
-	path = f'apigee/{ran}'
-	fire.send(path, data)
-	return render_template('createuser.html', data=data)
+@app.route('/createduser', methods=['GET', 'POST'])
+def created_user():
+	if request.method == 'POST':
+		from mydatabase import fire
+		import random 
+
+		fname = request.form['fname']
+		lname = request.form['lname']
+		age   = request.form['age']
+		ran   = random.randint(1000, 9999)
+
+		print(fname, lname, age)
+		data = {
+			'unique_ID'  : ran,
+			'first name' : fname if fname != '' else f'fname_{ran}',
+			'last name'  : lname if lname != '' else f'lname_{ran}',
+			'age'        : age   if age   != '' else f'age_{ran}',
+		}
+
+		path = f'apigee/{ran}'
+		fire.send(path, data)
+		return render_template('createuser.html',
+							submitted = True,
+							data=data
+							)
 
 
 @app.errorhandler(404)
